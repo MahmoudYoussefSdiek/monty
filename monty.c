@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 	while ((read = getline(&line, &len, file)) != -1)
 	{
 		space = line;
+		skip_comment(space);
 		while (*space && *space == ' ')
 			space++;
 		if (strcmp(space, "$\n") == 0)
@@ -50,7 +51,6 @@ int main(int argc, char *argv[])
 	return (EXIT_SUCCESS);
 }
 
-
 /**
  * free_and_close - function that free line and closes the file.
  *
@@ -63,4 +63,20 @@ void free_and_close(char *line, FILE *file)
 {
 	free(line);
 	fclose(file);
+}
+
+/**
+ * skip_comment - function that skips comments.
+ *
+ * @line: Pointer to the line.
+ *
+ * Return: void.
+ */
+void skip_comment(char *line)
+{
+	char *comment_start = NULL;
+
+	comment_start = strchr(line, '#');
+	if (comment_start != NULL)
+		*comment_start = '\0';
 }
