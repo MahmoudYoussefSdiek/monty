@@ -20,6 +20,9 @@ instruction_t *get_instruction(char *opcode)
 		{"nop", nop},
 		{"sub", sub},
 		{"div", div_op},
+		{"mul", mul_op},
+		{"mod", mod_op},
+		{"pchar", pchar_op},
 		{NULL, NULL}};
 	int i;
 
