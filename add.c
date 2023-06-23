@@ -1,7 +1,7 @@
 #include "monty.h"
 
 /**
- * add - function that sums the top two elements in the stack.
+ * add - function that sums the top two elements in the stack If the stack contains less than two elements.
  *
  * @stack: Pointer to the stack.
  * @line_number: Line number of the instruction.
