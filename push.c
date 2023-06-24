@@ -11,7 +11,7 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	char *arg = strtok(NULL, " \n\t;+");
+	char *arg = strtok(NULL, " \n\t");
 
 	if (!arg || !isdigit(*arg))
 	{

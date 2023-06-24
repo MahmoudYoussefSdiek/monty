@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 			new_line++;
 		if (strcmp(new_line, "$\n") == 0 || is_comment(new_line) == 1)
 			continue;
-		token = strtok(new_line, " \t$\n");
+		token = strtok(new_line, " \t$\n;+");
 		instruction = get_instruction(token);
 		line_number++;
 		if (instruction == NULL)
