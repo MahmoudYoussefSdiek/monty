@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
 	FILE *file;
-	char *line = NULL, *space = NULL, *token;
+	char *line = NULL, *new_line = NULL, *token;
 	size_t len = 0;
 	ssize_t read;
 	unsigned int line_number = 0;
@@ -30,13 +30,12 @@ int main(int argc, char *argv[])
 	}
 	while ((read = getline(&line, &len, file)) != -1)
 	{
-		space = line;
-		skip_comment(space);
-		while (*space && *space == ' ')
-			space++;
-		if (strcmp(space, "$\n") == 0)
+		new_line = line;
+		while (*new_line && *new_line == ' ')
+			new_line++;
+		if (strcmp(new_line, "$\n") == 0 || is_comment(new_line) == 1)
 			continue;
-		token = strtok(space, " \t$\n");
+		token = strtok(new_line, " \t$\n");
 		instruction = get_instruction(token);
 		line_number++;
 		if (instruction == NULL)
@@ -66,17 +65,23 @@ void free_and_close(char *line, FILE *file)
 }
 
 /**
- * skip_comment - function that skips comments.
+ * is_comment - function that check if the line is comment.
  *
  * @line: Pointer to the line.
  *
- * Return: void.
+ * Return: 1 or 0.
  */
-void skip_comment(char *line)
+int is_comment(char *line)
 {
-	char *comment_start = NULL;
+	int i;
 
-	comment_start = strchr(line, '#');
-	if (comment_start != NULL)
-		*comment_start = '\0';
+	for (i = 0; line[i] != '\0'; i++)
+	{
+		if (line[i] == '#')
+			return (1);
+		if (line[i] != ' ' && line[i] != '\t')
+			return (0);
+	}
+
+	return (1);
 }
