@@ -12,16 +12,15 @@
 void pstr_op(stack_t **stack, unsigned int line_number)
 {
 	stack_t *tmp = *stack;
-	int ascii_value;
 
 	while (tmp != NULL && tmp->n != 0)
 	{
-		ascii_value = tmp->n;
+		line_number = tmp->n;
 
-		if (ascii_value < 0 || ascii_value > 127)
+		if (line_number > 127)
 			break;
 
-		printf("%c", ascii_value);
+		printf("%c", line_number);
 		tmp = tmp->next;
 	}
 
