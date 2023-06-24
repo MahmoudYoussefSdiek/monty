@@ -23,6 +23,7 @@ instruction_t *get_instruction(char *opcode)
 		{"mul", mul_op},
 		{"mod", mod_op},
 		{"pchar", pchar_op},
+		{"pstr", pstr_op},
 		{NULL, NULL}};
 	int i;
 
